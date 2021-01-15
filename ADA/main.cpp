@@ -1,92 +1,44 @@
-#include <iostream>
-#include <list>
-#include <vector>
-#include <queue>
-#include <set>
+#include <bits/stdc++.h>
+/*#define printVec(v) for(auto x:v){cout<<x<<" ";}cout<<"\n";
+#define printMat(m) for(auto x:m){printVec(x);}
+#define printMap(m) for(auto x:m) {cout<<x.first<<"  "<<x.second<<"\n";}cout<<"\n";
+#define printSet(s) for(auto x:s) {cout<<x<<" ";}cout<<"\n";*/
+#define vec(v) v.begin(),v.end()
+#define INF INT_MAX
 using namespace std;
-/*class Graph {
-  int numVertices;
-  list<int>* adjLists;
-  bool* visited;
-
-   public:
-  Graph(int vertices);
-  void addEdge(int src, int dest);
-  void BFS(int startVertex);
-};
-
-Graph::Graph(int vertices) {
-  numVertices = vertices;
-  adjLists = new list<int>[vertices];
-}
-
-// Add edges to the graph
-void Graph::addEdge(int src, int dest) {
-  adjLists[src].push_back(dest);
-  adjLists[dest].push_back(src);
-}
-
-// BFS algorithm
-void Graph::BFS(int startVertex) {
-  visited = new bool[numVertices];
-  for (int i = 0; i < numVertices; i++)
-    visited[i] = false;
-
-  list<int> queue;
-
-  visited[startVertex] = true;
-  queue.push_back(startVertex);
-
-  list<int>::iterator i;
-
-  while (!queue.empty()) {
-    int currVertex = queue.front();
-    cout << "Visited " << currVertex << " ";
-    queue.pop_front();
-
-    for (i = adjLists[currVertex].begin(); i != adjLists[currVertex].end(); ++i) {
-      int adjVertex = *i;
-      if (!visited[adjVertex]) {
-        visited[adjVertex] = true;
-        queue.push_back(adjVertex);
-      }
+typedef long long ll;
+int h[8]={2,1,-1,-2,-1,1,-2,2};
+int v[8]={1,2,2,-1,-2,-2,1,-1};
+bool Tenta(int n, int x, int y, vector<vector<int> > &ss,int i=1){
+    int m=0;
+    if(ss[x][y])return false;
+    ss[x][y]=i;
+    if(i==n*n)return true;
+    while(m<8){
+        int xn=x+h[m];
+        int yn=y+v[m];
+        if(xn<n && xn>=0 && yn<n && yn>=0){
+          Tenta(n,xn,yn,ss,i+1);
+        }
+        m++;
     }
-  }
+    return false;
 }
-
-int main() {
-  Graph g(8);
-  g.addEdge(0, 1);
-  g.addEdge(1, 2);
-  g.addEdge(2, 3);
-  g.addEdge(2, 4);
-  g.addEdge(3, 5);
-  g.addEdge(3, 4);
-  g.addEdge(4, 3);
-  g.addEdge(4, 5);
-  g.addEdge(4, 6);
-  g.addEdge(6, 4);
-  g.addEdge(6, 7);
-  g.addEdge(7, 5);
-
-  g.BFS(2);
-
-  return 0;
-}
-*/
-#include<iostream>
-#include <fstream>
-using namespace std;
 int main()
 {
-    ifstream archivo_entrada;
-    string linea;
-
-    archivo_entrada.open("D:/quinto semestre/base de datos II/archivos/tb200.txt");
-    while(!archivo_entrada.eof()){
-    getline(archivo_entrada, linea);
-
-    cout << linea << endl;
+    int n;
+    cin>>n;
+    vector< vector<int> >nb(n,vector<int>(n,0));
+    int x,y;
+    cin>>x>>y;
+    cout<<Tenta(n,x-1,y-1,nb,1)<<endl;
+    for(int i=0;i<n;++i)
+    {
+        for(int j=0;j<n;++j)
+        {
+            cout<<nb[i][j]<<" ";
+        }
+        cout<<endl;
     }
-}
 
+}
