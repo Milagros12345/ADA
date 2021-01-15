@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1589128306 source:d:\quinto semestre\ada\insetion y mezcla\main.cpp
+	<iostream>
+	<ctime>
+	<time.h>
+	<algorithm>
+
